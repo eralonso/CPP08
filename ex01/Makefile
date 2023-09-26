@@ -6,7 +6,7 @@
 #    By: eralonso <eralonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/22 10:08:41 by eralonso          #+#    #+#              #
-#    Updated: 2023/09/25 19:10:19 by eralonso         ###   ########.fr        #
+#    Updated: 2023/09/26 16:46:24 by eralonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,11 +56,11 @@ SRC_DIRS	:=	$(addprefix $(SRC_ROOT),$(SRC_DIRS))
 SRC_DIRS	:=	$(subst $(SPACE),:,$(SRC_DIRS))
 
 #<--------------------------------->FILES<---------------------------------->#
-FILES		:=	main
+FILES		:=	main Span
 
 #<---------------------------------->LANG<---------------------------------->#
 LANG		:=	CPP
-CFLAGS		:=	-Wall -Wextra -Werror #-fsanitize=address
+CFLAGS		:=	-Wall -Wextra -Werror -fsanitize=address
 
 ifeq ($(LANG),C)
 	CC := cc
