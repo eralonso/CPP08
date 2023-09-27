@@ -6,7 +6,7 @@
 /*   By: eralonso <eralonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 11:23:24 by eralonso          #+#    #+#             */
-/*   Updated: 2023/09/25 12:13:46 by eralonso         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:53:23 by eralonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	test( T& arr, int *numbers, unsigned int size, int toFind )
 		arr.push_back( numbers[ i ] );
 	try
 	{
-		easyfind( arr, toFind );
+		easyfind< T >( arr, toFind );
 		std::cout << "Integer " << toFind << " Found" << std::endl;
 	}
 	catch ( const std::runtime_error& e )

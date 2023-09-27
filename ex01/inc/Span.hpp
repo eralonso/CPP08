@@ -6,7 +6,7 @@
 /*   By: eralonso <eralonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:10:39 by eralonso          #+#    #+#             */
-/*   Updated: 2023/09/26 16:44:13 by eralonso         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:41:26 by eralonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class Span
 		long			shortestSpan( void ) const;
 		long			longestSpan( void ) const;
 		template < typename T >
-		void			fill( T begin, T end );
+		void			fill( const typename T::iterator& begin, const typename T::iterator& end );
 };
 
 #include "Span.tpp"

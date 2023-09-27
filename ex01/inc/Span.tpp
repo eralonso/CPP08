@@ -6,7 +6,7 @@
 /*   By: eralonso <eralonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:58:08 by eralonso          #+#    #+#             */
-/*   Updated: 2023/09/26 16:44:15 by eralonso         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:27:33 by eralonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "Span.hpp"
 
 template < typename T >
-void	Span::fill( T begin, T end )
+void	Span::fill( const typename T::iterator& begin, const typename T::iterator& end )
 {
 	if ( std::distance( begin, end ) + this->_arr.size() > this->_maxSize  )
 		throw std::length_error( "Length is too long" );

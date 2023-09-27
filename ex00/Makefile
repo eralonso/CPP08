@@ -6,7 +6,7 @@
 #    By: eralonso <eralonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/22 10:08:41 by eralonso          #+#    #+#              #
-#    Updated: 2023/09/25 19:08:07 by eralonso         ###   ########.fr        #
+#    Updated: 2023/09/27 14:32:42 by eralonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,19 +109,21 @@ create_dir = $(shell $(MKD) $(1))
 
 all : $(NAME)
 
-$(DEP_ROOT)%.d : %.$(SUFFIX) $(MK) | $(call create_dir,$(DEP_ROOT))
+.SECONDEXPANSION:
+
+$(DEP_ROOT)%.d : %.$(SUFFIX) $(MK) | $$(call create_dir,$$(DEP_ROOT))
 	$(call msg_creating,Dependence,$*,$(BLUE))
 	$(CC) $(CFLAGS) -MMD -MF $@ $(INCLUDE) -c $< && rm -rf $(addsuffix .o,$*)
 	sed -i.tmp '1 s|:| $@ :|' $@ && rm -rf $(addsuffix .tmp,$@)
 	sed -i.tmp '1 s|^$*|$(OBJ_ROOT)$*|' $@ && rm -rf $(addsuffix .tmp,$@)
 
-$(OBJ_ROOT)%.o : %.$(SUFFIX) $(MK) %.d $(LIB_A) | $(call create_dir,$(OBJ_ROOT))
+$(OBJ_ROOT)%.o : %.$(SUFFIX) $(MK) %.d $(LIB_A) | $$(call create_dir,$$(OBJ_ROOT))
 	$(call msg_creating,Object,$*,$(PINK))
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-$(NAME) : $(DEPS) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(PRENAME)
-	echo "\n$(GREEN)"$(PRENAME)" has been compiled\n$(DEF_COLOR)"
+$(NAME): $(DEPS) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	echo "\n$(GREEN)"$(NAME)" has been compiled\n$(DEF_COLOR)"
 
 clean :
 	$(RM) $(OBJ_ROOT) $(DEP_ROOT)
@@ -131,7 +133,7 @@ clean :
 
 fclean :
 	$(MAKE) $(MKFLAGS) clean
-	$(RM) $(PRENAME)
+	$(RM) $(NAME)
 	echo ""
 	echo "$(RED)Program has been removed$(DEF_COLOR)"
 
@@ -145,8 +147,6 @@ re :
 
 .SILENT :
 
-ifeq (,$(findstring clean,$(MAKECMDGOALS)))
-ifeq (,$(findstring re,$(MAKECMDGOALS)))
--include $(DEPS)
-endif
+ifeq (,$(filter-out all $(NAME),$(MAKECMDGOALS)))
+ -include $(DEPS)
 endif
