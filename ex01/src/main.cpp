@@ -6,7 +6,7 @@
 /*   By: eralonso <eralonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:33:48 by eralonso          #+#    #+#             */
-/*   Updated: 2023/09/27 17:47:05 by eralonso         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:02:22 by eralonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main( void )
 	Span			sp( 6 );
 	array< int, 6 >	arr = { -1, 12, 7, 9, 3, 125 };
 
-	sp.fill< array< int, 6 > >( arr.begin(), arr.end() );
+	sp.addNumber< array< int, 6 > >( arr.begin(), arr.end() );
 	try
 	{
 		std::cout << sp.shortestSpan() << std::endl;

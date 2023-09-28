@@ -6,7 +6,7 @@
 /*   By: eralonso <eralonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:07:27 by eralonso          #+#    #+#             */
-/*   Updated: 2023/09/27 17:45:02 by eralonso         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:02:07 by eralonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,37 @@ void	Span::addNumber( const int n )
 {
 	if ( this->_arr.size() + 1 > this->_maxSize )
 		throw std::length_error( "Span is full" );
-	this->_arr.push_back( n );
+	this->_arr.insert( n );
+}
+
+void	Span::fill( unsigned int n )
+{
+	if ( this->_arr.size() + n > this->_maxSize )
+		throw std::length_error( "Length is too long" );
+	for ( unsigned int i = 0; i < n; i++ )
+	{
+		srand( time( NULL ) );
+		this->_arr.insert( rand() );
+	}
 }
 
 long	Span::shortestSpan( void ) const
 {
 	long	minSpan;
 
+	minSpan = std::numeric_limits< unsigned int >::max();
 	if ( this->_arr.size() < 2 )
 		throw std::runtime_error( "Can't find shortest span with less than 2 numbers" );
-	minSpan = UINT_MAX;
-	for ( unsigned int i = 0; i < this->_arr.size(); i++ )
-	{
-		for ( unsigned int j = 0; j < this->_arr.size(); j++ )
-		{
-			if ( i != j && std::abs( static_cast< long >( this->_arr[ i ] ) - static_cast< long >( this->_arr[ j ] ) ) < minSpan )
-				minSpan = std::abs( static_cast< long >( this->_arr[ i ] ) - static_cast< long >( this->_arr[ j ] ) );
-		}
-	}
+	for ( std::multiset< int >::const_iterator it = this->_arr.cbegin(); it != this->_arr.cend(); it++ )
+		if ( std::abs( *it ) < minSpan )
+			minSpan = *it;
 	return ( minSpan );
 }
 
 long	Span::longestSpan( void ) const
 {
-	std::vector< int >::const_iterator	min;
-	std::vector< int >::const_iterator	max;
+	std::multiset< int >::const_iterator	min;
+	std::multiset< int >::const_iterator	max;
 
 	if ( this->_arr.size() < 2 )
 		throw std::runtime_error( "Can't find longest span with less than 2 numbers" );
