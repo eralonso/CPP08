@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Span.tpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eralonso <eralonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 10:58:08 by eralonso          #+#    #+#             */
-/*   Updated: 2023/09/28 15:13:04 by eralonso         ###   ########.fr       */
+/*   Created: 2023/09/26 11:33:48 by eralonso          #+#    #+#             */
+/*   Updated: 2023/09/28 18:16:05 by eralonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include <iostream>
 
-#include "Span.hpp"
-
-template < typename T >
-void	Span::addNumber( const typename T::iterator& begin, const typename T::iterator& end )
+int main( void )
 {
-	if ( std::distance( begin, end ) + this->_arr.size() > this->_maxSize  )
-		throw std::length_error( "Length is too long" );
-	this->_arr.insert( begin, end );
+    return ( 0 );
 }
